@@ -32,7 +32,15 @@ public class JoinFormAction extends HttpServlet {
 		UserDao userDao = UserDao.getInstance();
 		UserRequestDto user = new UserRequestDto(username,userpassword,name,birth,gender,tel,pnum);
 		
+		boolean result = userDao.createUser(user);
 		
+		System.out.println("result : "+ result);
+		
+		if(result){
+			response.sendRedirect("/login");
+		}else{
+			response.sendRedirect("/join");
+		}
 		
 	}
 

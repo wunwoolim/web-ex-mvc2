@@ -26,6 +26,13 @@ public class UserRequestDto {
 		this.pnum=pnum;
 	}
 	
+	public UserRequestDto(String password,String name,String tel,String pnum) {
+		this.password = password;
+		this.name=name;
+		this.tel=tel;
+		this.pnum=pnum;
+	}
+	
 	public UserRequestDto(String username,String password) {
 		this.username =username;
 		this.password = password;

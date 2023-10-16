@@ -27,6 +27,13 @@ public class User {
 		this.pnum=pnum;
 	}
 	
+	public User(String password,String name,String tel,String pnum) {
+		this.password = password;
+		this.name=name;
+		this.tel=tel;
+		this.pnum=pnum;
+	}
+	
 	public User(String username,String password) {
 		this.username =username;
 		this.password = password;

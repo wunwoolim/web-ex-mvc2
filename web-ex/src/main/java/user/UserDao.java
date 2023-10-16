@@ -25,11 +25,6 @@ public class UserDao {
 		return instance;
 	}
 	
-
-//	public int getSize() {
-//		return list.size();
-//	}
-//	
 	public boolean createUser(UserRequestDto user) {
 		if(isDuplicatedUser(user)) {
 			return false;
@@ -37,11 +32,42 @@ public class UserDao {
 		User newUser = new User(user);
 		newUser.setId(generateId());
 		
+		conn = DBmanager.getConnection();
+		
+		if(conn != null) {
+			String sql = "INSERT INTO `USER` VALUES(?,?,?,?,date(?),?,?,?)";
+			
+			int genterStr;
+			if(newUser.getGender()  == "male") {
+				genterStr = 1;
+			}else {
+				genterStr = 2;
+			}
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, newUser.getId());
+				pstmt.setString(2, newUser.getUsername());
+				pstmt.setString(3, newUser.getPassword());
+				pstmt.setString(4, newUser.getName());
+				pstmt.setString(5, newUser.getBirth());
+				pstmt.setInt(6, genterStr);
+				pstmt.setString(7, newUser.getTel());
+				pstmt.setString(8, newUser.getPnum());
+				
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				DBmanager.close(conn, pstmt);
+			}
+		}
+		
+		
 		return true;
 	}
 	
 	public boolean isDuplicatedUser(UserRequestDto user) {
-		UserResponseDto result =null;
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
@@ -53,15 +79,18 @@ public class UserDao {
 				
 				rs = pstmt.executeQuery();
 				
-			} catch (Exception e) {
-				// TODO: handle exception
+				if(rs.next()) {
+					return true;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				DBmanager.close(conn, pstmt, rs);
 			}
-				
-				
-		
+		}
 		return false;
 	}
-	
 //	public boolean duplicatedUser(UserRequestDto user) {
 //		for(int i=0; i<list.size(); i++) {
 //			if(user.getUsername().equals((list).get(i).getUsername()) && user.getPassword().equals((list).get(i).getPassword())) {
@@ -72,29 +101,58 @@ public class UserDao {
 //		return false;
 //	}
 //	
-//	public boolean passwoerUser(UserRequestDto user) {
-//		for(int i=0; i<list.size(); i++) {
-//			if(user.getPassword().equals((list).get(i).getPassword())) {
-//				return true;
-//			}
-//		}
-//		
-//		return false;
-//	}
-//	
+	public boolean passwoerUser(UserRequestDto user) {
+		boolean result = false;
+		conn = DBmanager.getConnection();
+		
+		if(conn != null) {
+			String sql = "select * from `USER` where password = ?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, user.getPassword());
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					result = true;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return result;
+	}
+	
 	private int generateId() {
 		int id = 0;
-		boolean idDupl = false;
-		do {
+		boolean idDupl = true;
+		if(idDupl == true) {
+			
 			id =(int) Math.floor(Math.random() * (9999-1000+1))+1000; // 1000~9999 랜덤
 			
+			conn = DBmanager.getConnection();
 			
-			for(int i=0; i<list.size(); i++) {
-				if(list.get(i).getId() == id){
-					idDupl = true;
+			if(conn != null) {
+				String sql = "select * from `USER` where id = ?";
+				try {
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, id);
+					
+					rs = pstmt.executeQuery();
+					
+					if(rs.next()) {
+						idDupl = false;
+					}
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
 			}
-		}while(idDupl);
+		}
+			
 		
 		return id;
 	}
@@ -183,43 +241,76 @@ public class UserDao {
 		
 		return result;
 	}
-//	
+	
 //	private User getUser(UserRequestDto userDto) {
 //		User user = null;
-//		for(int i=0; i<list.size(); i++) {
-//			if(list.get(i).getUsername().equals(userDto.getUsername())) {
-//				user = list.get(i);
+//		
+//		conn = DBmanager.getConnection();
+//		
+//		if(conn != null) {
+//			String sql = "select * from `USER` where username = ?";
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setString(1, userDto.getUsername());
+//				
+//				String password = userDto.getPassword();
+//				String name = userDto.getName();
+//				String tel = userDto.getTel();
+//				String pnum = userDto.getPnum();
+//				
+//				rs = pstmt.executeQuery();
+//				
+//				if(rs.next()) {
+//					user = new User(password,name,tel,pnum);
+//					System.out.println("user : "+user);
+//				}
+//				
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}finally{
+//				DBmanager.close(conn, pstmt, rs);
 //			}
 //		}
+//		
 //		return user;
 //	}
-//	
-//	public ArrayList<UserResponseDto> findAll() {
-//		ArrayList<UserResponseDto> respons = new ArrayList<>();
-//		
-//		for(int i=0; i<list.size(); i++) {
-//			User user = list.get(i);
-//			respons.add(new UserResponseDto(user));
-//		}
-//		return respons;
-//	}
-//	
-//	public boolean setUser(UserRequestDto user) {
-//		User target = getUser(user);
-//		
-//		if(target == null) {
-//			return false;
-//		}
-//		target.setUsername(user.getUsername());
-//		target.setPassword(user.getPassword());
-//		target.setName(user.getName());
-//		target.setBirth(user.getBirth());
-//		target.setGender(user.getGender());
-//		target.setTel(user.getTel());
-//		target.setPnum(user.getPnum());
-//		
-//		return true;
-//	}
+	
+	public ArrayList<UserResponseDto> findAll() {
+		ArrayList<UserResponseDto> respons = new ArrayList<>();
+		
+		
+		return respons;
+	}
+	
+	public boolean setUser(UserRequestDto user) {
+		User target = new User(user);
+		
+		conn = DBmanager.getConnection();
+		
+		if(conn != null) {
+			String sql = "UPDATE `USER` SET password = ?,name = ?, tel = ?, pnum = ? ";
+					sql	+= "WHERE user = ?";
+			try {
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, user.getUsername());
+				pstmt.setString(2, user.getUsername());
+				pstmt.setString(3, user.getUsername());
+				pstmt.setString(4, user.getUsername());
+				pstmt.setString(5, user.getUsername());
+				
+				pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				DBmanager.close(conn, pstmt);
+			}
+		}
+		
+		
+		return true;
+	}
 //	
 //	public boolean delsetUser(UserRequestDto user) {
 //		System.out.println("user : "+user.getUsername());
