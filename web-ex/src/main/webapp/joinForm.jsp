@@ -11,7 +11,7 @@
 <body>
 	<!-- <button>가입</button> -->
 	<!-- form 안에 button태그는 submit 동작을 하게됨 -->
-	<form method="POST" action="/joinFormPro" id="form">
+	<form method="POST" action="/api/user/join" id="form">
 		<div>
 				<div class="group">
 					<input type="text" name="username" id="username" placeholder="아이디">

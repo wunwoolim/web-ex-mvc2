@@ -15,6 +15,11 @@
 	<sction>
 		<p>Hello world</p>
 	</sction>
+	<%
+		UserDao dao = UserDao.getInstance();
+		dao.findById(1234);
+		
+	%>
 	
 </body>
 <jsp:include page="/footer"></jsp:include>
