@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -29,26 +30,38 @@ public class UserDao {
 //		return list.size();
 //	}
 //	
-//	public boolean createUser(UserRequestDto user) {
-//		if(isDuplicatedUser(user)) {
-//			return false;
-//		}
-//		User newUser = new User(user);
-//		newUser.setId(generateId());
-//		list.add(newUser);
-//		return true;
-//	}
-//	
-//	public boolean isDuplicatedUser(UserRequestDto user) {
-//		for(int i=0; i<list.size(); i++) {
-//			if(user.getUsername().equals((list).get(i).getUsername())) {
-//				return true;
-//			}
-//		}
-//		
-//		return false;
-//	}
-//	
+	public boolean createUser(UserRequestDto user) {
+		if(isDuplicatedUser(user)) {
+			return false;
+		}
+		User newUser = new User(user);
+		newUser.setId(generateId());
+		
+		return true;
+	}
+	
+	public boolean isDuplicatedUser(UserRequestDto user) {
+		UserResponseDto result =null;
+		conn = DBmanager.getConnection();
+		
+		if(conn != null) {
+			String sql = "select * from `USER` where id = ?";
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, user.getUsername());
+				
+				rs = pstmt.executeQuery();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+				
+				
+		
+		return false;
+	}
+	
 //	public boolean duplicatedUser(UserRequestDto user) {
 //		for(int i=0; i<list.size(); i++) {
 //			if(user.getUsername().equals((list).get(i).getUsername()) && user.getPassword().equals((list).get(i).getPassword())) {
@@ -69,22 +82,22 @@ public class UserDao {
 //		return false;
 //	}
 //	
-//	private int generateId() {
-//		int id = 0;
-//		boolean idDupl = false;
-//		do {
-//			id =(int) Math.floor(Math.random() * (9999-1000+1))+1000; // 1000~9999 랜덤
-//			
-//			
-//			for(int i=0; i<list.size(); i++) {
-//				if(list.get(i).getId() == id){
-//					idDupl = true;
-//				}
-//			}
-//		}while(idDupl);
-//		
-//		return id;
-//	}
+	private int generateId() {
+		int id = 0;
+		boolean idDupl = false;
+		do {
+			id =(int) Math.floor(Math.random() * (9999-1000+1))+1000; // 1000~9999 랜덤
+			
+			
+			for(int i=0; i<list.size(); i++) {
+				if(list.get(i).getId() == id){
+					idDupl = true;
+				}
+			}
+		}while(idDupl);
+		
+		return id;
+	}
 	
 	public UserResponseDto findById(int id) {
 		UserResponseDto result =null;
@@ -119,18 +132,56 @@ public class UserDao {
 					System.out.println("result : "+result);
 				}
 				
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
+			}finally {
+				DBmanager.close(conn, pstmt, rs);
 			}
 		}
 		
 		return result;
 	}
 	
-	public UserResponseDto findByUsername(String username) {
+	public UserResponseDto findByUsername(String username,String password) {
+		UserResponseDto result =null;
+		conn = DBmanager.getConnection();
 		
+		if(conn != null) {
+			String sql = "select * from `USER` where username = ? AND `password` = ?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, username);
+				pstmt.setString(2, password);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					int id = rs.getInt(1);
+					String name = rs.getString(4);
+					String birth = rs.getString(5);
+					int gender = rs.getInt(6);
+					String tel = rs.getString(7);
+					String pnum = rs.getString(8);
+					
+					String genterStr = "";
+					if(gender  == 1) {
+						genterStr ="male";
+					}else {
+						genterStr = "female";
+					}
+					
+					result =new UserResponseDto(new User(id,username,password,name,birth,genterStr,tel,pnum));
+					System.out.println("result : "+result);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				DBmanager.close(conn, pstmt, rs);
+			}
+		}
 		
-		return null;
+		return result;
 	}
 //	
 //	private User getUser(UserRequestDto userDto) {

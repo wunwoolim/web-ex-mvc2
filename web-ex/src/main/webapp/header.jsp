@@ -12,29 +12,30 @@
 	<header>
 		<h1>The Joeun JSP MVC1</h1>
 	</header>
+	
+	<nav>
+		<ul>
+			<li><a href="/">홈</a></li>
+			
 	<% 
 	UserResponseDto responseUser = (UserResponseDto) session.getAttribute("responseUser");
 	if(responseUser == (null)){
-	%>
-	<nav>
-		<ul>
+	%>		
 			<li><a href="/join">회원가입</a></li>
 			<li><a href="/login">로그인</a></li>
-			<li><a href="/mypage">마이페이지</a></li>
-		</ul>
-	</nav>
-	<%
+		<%
 	}else{
-		%>
-	<nav>
-		<ul>
+		%>	
 			<li><%= responseUser.getName() %>님 환영합니다.</li>
 			<li><a href="/logout">로그아웃</a></li>
+		<%
+	}
+	%>	
 			<li><a href="/mypage">마이페이지</a></li>
+			<li><a href="">회원목록 조회</a></li>
 		</ul>
 	</nav>
-	<%
-	}
-	%>
+
+	
 </body>
 </html>

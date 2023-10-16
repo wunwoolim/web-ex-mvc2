@@ -43,7 +43,7 @@
 	
 	<servlet>
 		<servlet-name>logout</servlet-name>
-		<jsp-file>/logout.jsp</jsp-file>
+		<servlet-class>user.controller.LogoutAction</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -85,7 +85,7 @@
 
 	<servlet>
 		<servlet-name>joinForm</servlet-name>
-		<jsp-file>/joinForm.jsp</jsp-file>
+		<jsp-file>/views/joinForm.jsp</jsp-file>
 	</servlet>
 
 	<servlet-mapping>
@@ -95,7 +95,7 @@
 	
 	<servlet>
 		<servlet-name>loginForm</servlet-name>
-		<jsp-file>/loginForm.jsp</jsp-file>
+		<jsp-file>/views/loginForm.jsp</jsp-file>
 	</servlet>
 
 	<servlet-mapping>
@@ -105,7 +105,7 @@
 	
 	<servlet>
 		<servlet-name>mypage</servlet-name>
-		<jsp-file>/mypage.jsp</jsp-file>
+		<jsp-file>/views/mypage.jsp</jsp-file>
 	</servlet>
 
 	<servlet-mapping>
