@@ -1,5 +1,5 @@
-<%@page import="user.UserDao"%>
-<%@page import="user.UserResponseDto"%>
+<%@page import="model.user.UserDao"%>
+<%@page import="model.user.UserResponseDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,17 +13,13 @@
 	
 	UserResponseDto responseUser = (UserResponseDto) session.getAttribute("responseUser");
 	
-	/* boolean update = (boolean) session.getAttribute("update");
-	
-	System.out.println(update); */
-	
-	
 	if(responseUser == null){
 		response.sendRedirect("/login");
 	}else{
 		
 	%>
-	<form method="POST" action="/mypagePro" id="form">
+	
+	<form method="POST" action="/Service" id="form">
 		<h1><%= responseUser.getName() %>님 환영합니다.</h1>
 		<% 
 			Boolean result = (Boolean)session.getAttribute("result");
@@ -36,7 +32,7 @@
 			<div class="group">
 					<input type="password" name="userpassword" id="userpassword" placeholder="비밀번호 확인">
 			</div>
-					<input type="hidden" name="check" value="passwordCheck" id="passwordCheck">
+					<input type="hidden" name="command" value="passwordCheck" id="passwordCheck">
 					<input type="button" value="passwordCkeck" onclick="passwordCkeck(form)" id="btn-submit">
 			<div class="error-msg">
 						<ul>
@@ -55,20 +51,20 @@
 				<input type="text" name="name" id="name" placeholder="이름" value = <%= responseUser.getName() %>>
 				<input type="text" name="birth" id="birth" placeholder="생년월일" value=<%= responseUser.getBirth() %> readonly>
 				<input type="text" name="gender" id="gender" value=<%= responseUser.getGender() %> readonly>
-				<input type="radio" name="tel" id="SKT" value="SKT">
+				<input type="radio" name="tel" id="STK" value="STK" checked>
 				<input type="radio" name="tel" id="KT" value="KT">
 				<input type="radio" name="tel" id="LG" value="LG U+">
 						
 				<div id="tel">
-					<label for="STK" id="for-STK">
-						<div>STK</div>
-					</label>
-					<label for="KT" id="for-KT">
-						<div>KT</div>
-					</label>
-					<label for="LG" id="for-LG">
-						<div>LG U+</div>
-					</label>
+						<label for="STK" id="for-STK">
+							<div>STK</div>
+						</label>
+						<label for="KT" id="for-KT">
+							<div>KT</div>
+						</label>
+						<label for="LG" id="for-LG">
+							<div>LG U+</div>
+						</label>
 				</div>
 				
 				<input type="text" name="pnum" id="pnum" placeholder="휴대폰번호 3자-4자-4자" value = <%= responseUser.getPnum() %>>
@@ -98,7 +94,7 @@
 			
 			<input type="button" value="탈퇴하기" onclick="deleteUser(form)" id="btn-submit">
 		</div>
-		<input type="hidden" name="check" value="" id="checkValue">
+		<input type="hidden" name="command" value="" id="checkValue">
 		<% } %>
 	</form>
 	<% } %>

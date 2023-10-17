@@ -9,7 +9,8 @@
 </head>
 <jsp:include page="/header"></jsp:include>
 <body>
-	<form method="POST" action="/loginFormPro">
+	<form method="POST" action="/Service" >
+	<input type="hidden" name="command" id="command" value="login">
 		<div>
 			<div class="group">
 				<input type="text" name="username" id="username" placeholder="아이디">

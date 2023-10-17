@@ -2,9 +2,9 @@
 <%-- java Server page : jsp --%>
 <%-- html 문서 안에 작성된 java 언어 --%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="user.UserResponseDto"%>
-<%@page import="user.UserRequestDto"%>
-<%@page import="user.UserDao"%>
+<%@page import="model.user.UserResponseDto"%>
+<%@page import="model.user.UserRequestDto"%>
+<%@page import="model.user.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

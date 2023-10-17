@@ -11,7 +11,17 @@
   </welcome-file-list>
   
   <!-- servlet-class Mapping -->
-  <servlet>
+  	<servlet>
+		<servlet-name>ServiceServlet</servlet-name>
+		<servlet-class>controller.ServiceServet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ServiceServlet</servlet-name>
+		<url-pattern>/Service</url-pattern>
+	</servlet-mapping>
+  
+  <!-- <servlet>
 		<servlet-name>joinFormAction</servlet-name>
 		<servlet-class>user.controller.JoinFormAction</servlet-class>
 	</servlet>
@@ -59,7 +69,7 @@
 	<servlet-mapping>
 		<servlet-name>memberListAction</servlet-name>
 		<url-pattern>/api/user/memberList</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	
   <!-- jsp file Mapping -->
   <servlet>
@@ -94,7 +104,7 @@
 
 	<servlet>
 		<servlet-name>joinForm</servlet-name>
-		<jsp-file>/views/joinForm.jsp</jsp-file>
+		<jsp-file>/views/user/joinForm.jsp</jsp-file>
 	</servlet>
 
 	<servlet-mapping>
@@ -104,7 +114,7 @@
 	
 	<servlet>
 		<servlet-name>loginForm</servlet-name>
-		<jsp-file>/views/loginForm.jsp</jsp-file>
+		<jsp-file>/views/user/loginForm.jsp</jsp-file>
 	</servlet>
 
 	<servlet-mapping>
@@ -114,7 +124,7 @@
 	
 	<servlet>
 		<servlet-name>mypage</servlet-name>
-		<jsp-file>/views/mypage.jsp</jsp-file>
+		<jsp-file>/views/user/mypage.jsp</jsp-file>
 	</servlet>
 
 	<servlet-mapping>
@@ -124,7 +134,7 @@
 	
 	<servlet>
 		<servlet-name>memberList</servlet-name>
-		<jsp-file>/views/memberList.jsp</jsp-file>
+		<jsp-file>/views/user/memberList.jsp</jsp-file>
 	</servlet>
 
 	<servlet-mapping>

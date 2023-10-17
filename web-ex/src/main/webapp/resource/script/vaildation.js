@@ -184,7 +184,7 @@ function updateUser(form){
 		input_pnum.style.borderColor = "red";
 		error_pnum.style.display = "block";
 	}else{
-		form.check.value = "updateCheck";
+		form.command.value = "updateCheck";
 		document.getElementById("checkValue").value = "updateCheck";
 		form.submit();
 	}
@@ -198,7 +198,7 @@ function deleteUser(form){
 		input_userpasswordDel.style.borderColor = "red";
 		error_userpasswordDel.style.display = "block";
 	}else{
-		form.check.value = "deleteCheck";
+		form.command.value = "deleteCheck";
 		document.getElementById("checkValue").value = "deleteCheck";
 		form.submit();
 	}
