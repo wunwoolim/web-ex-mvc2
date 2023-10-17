@@ -1,3 +1,4 @@
+```
 +---.settings
 +---build
 |   \---classes
@@ -18,3 +19,4 @@
             +---views
             \---WEB-INF
                 \---lib
+```
