@@ -56,7 +56,7 @@ public class MypageFormAction extends HttpServlet {
 			UserRequestDto userCheck = new UserRequestDto(username,userpassword,name,birth,gender,tel,pnum);
 		    boolean update = userDao.setUser(userCheck);
 		    
-		    System.out.println("update : "+update);
+		   //System.out.println("update : "+update);
 		   	
 			response.sendRedirect("/logout");
 			
@@ -64,17 +64,12 @@ public class MypageFormAction extends HttpServlet {
 			String username =	request.getParameter("username");
 			String userpassword =	request.getParameter("userpasswordDel");
 			
-//			System.out.println("username : "+username);
-//			System.out.println("userpassword : "+userpassword);
 			
 			UserRequestDto userCheck = new UserRequestDto(username,userpassword);
-			//boolean deldate = userDao.delsetUser(userCheck);
+			boolean deldate = userDao.delsetUser(userCheck);
 			
 			//System.out.println("deldate : "+deldate);
 			
-			ArrayList<UserResponseDto> list = userDao.findAll();
-			
-			System.out.println("list : "+list);
 			response.sendRedirect("/logout");
 		}
 	}

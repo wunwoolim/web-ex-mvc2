@@ -32,7 +32,7 @@
 	}
 	%>	
 			<li><a href="/mypage">마이페이지</a></li>
-			<li><a href="">회원목록 조회</a></li>
+			<li><a href="/api/user/memberList">회원목록 조회</a></li>
 		</ul>
 	</nav>
 

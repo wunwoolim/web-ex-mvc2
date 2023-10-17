@@ -16,8 +16,18 @@ public class User {
 		this.password = password;
 	}
 	
-	public User( int id,String username,String password,String name,String birth,String gender,String tel,String pnum) {
+	public User(int id,String username,String password,String name,String birth,String gender,String tel,String pnum) {
 		this.id = id;
+		this.username =username;
+		this.password = password;
+		this.name=name;
+		this.birth =birth;
+		this.gender = gender;
+		this.tel=tel;
+		this.pnum=pnum;
+	}
+	
+	public User(String username,String password,String name,String birth,String gender,String tel,String pnum) {
 		this.username =username;
 		this.password = password;
 		this.name=name;

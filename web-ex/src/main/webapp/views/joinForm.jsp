@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/resource/style/form.css">
 <title>Join</title>
 </head>
 <jsp:include page="/header"></jsp:include>
@@ -20,9 +19,9 @@
 				
 				<div class="error-msg">
 					<ul>
-					<li id="usernameCheck">아이디는 필수 입력값입니다.</li>
-					<li id="passwordCheck">비밀번호는 필수 입력값입니다.</li>
-				</ul>
+						<li id="usernameCheck">아이디는 필수 입력값입니다.</li>
+						<li id="passwordCheck">비밀번호는 필수 입력값입니다.</li>
+					</ul>
 				</div>
 				
 				
