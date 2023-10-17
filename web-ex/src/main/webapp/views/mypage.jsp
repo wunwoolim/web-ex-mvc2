@@ -9,8 +9,15 @@
 <jsp:include page="/header"></jsp:include>
 <body>
 	<%
-		UserResponseDto responseUser = (UserResponseDto) session.getAttribute("responseUser");
-		
+	
+	
+	UserResponseDto responseUser = (UserResponseDto) session.getAttribute("responseUser");
+	
+	/* boolean update = (boolean) session.getAttribute("update");
+	
+	System.out.println(update); */
+	
+	
 	if(responseUser == null){
 		response.sendRedirect("/login");
 	}else{
@@ -48,7 +55,7 @@
 				<input type="text" name="name" id="name" placeholder="이름" value = <%= responseUser.getName() %>>
 				<input type="text" name="birth" id="birth" placeholder="생년월일" value=<%= responseUser.getBirth() %> readonly>
 				<input type="text" name="gender" id="gender" value=<%= responseUser.getGender() %> readonly>
-				<input type="radio" name="tel" id="STK" value="STK">
+				<input type="radio" name="tel" id="SKT" value="SKT">
 				<input type="radio" name="tel" id="KT" value="KT">
 				<input type="radio" name="tel" id="LG" value="LG U+">
 						

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Join</title>
+<link rel="stylesheet" href="/resource/style/form.css">
 </head>
 <jsp:include page="/header"></jsp:include>
 <body>

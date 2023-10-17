@@ -23,12 +23,9 @@ public class LogoutAction extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		UserResponseDto responseUser = (UserResponseDto) session.getAttribute("responseUser");
 		
-		if(responseUser != null){
-			session.invalidate();
-		}
-		
+		session.invalidate();
+
 		response.sendRedirect("/login");
 	
 	}

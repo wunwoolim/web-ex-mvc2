@@ -32,9 +32,9 @@ public class UserDao {
 		User newUser = new User(user);
 		newUser.setId(generateId());
 		
-		conn = DBmanager.getConnection();
+		//conn = DBmanager.getConnection(); 앞에서 선언 후 finally가 안되있으므로 선언할 필요가 없다
+		//초기화만 시켜준다
 		
-		if(conn != null) {
 			String sql = "INSERT INTO `USER` VALUES(?,?,?,?,date(?),?,?,?)";
 			
 			int genterStr;
@@ -61,17 +61,19 @@ public class UserDao {
 			}finally{
 				DBmanager.close(conn, pstmt);
 			}
-		}
+		
 		
 		
 		return true;
 	}
 	
 	public boolean isDuplicatedUser(UserRequestDto user) {
+		String sql = "select * from `USER` where userbname = ?";
+		
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
-			String sql = "select * from `USER` where id = ?";
+			
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -85,8 +87,6 @@ public class UserDao {
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
-				DBmanager.close(conn, pstmt, rs);
 			}
 		}
 		return false;

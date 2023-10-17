@@ -38,13 +38,9 @@ public class MypageFormAction extends HttpServlet {
 			UserRequestDto userCheck = new UserRequestDto(userpassword);
 			boolean result = userDao.passwoerUser(userCheck);
 			
-			if(result){
-				session.setAttribute("result", result);
-				response.sendRedirect("/mypage");
-			}else{
-				session.setAttribute("result", result);
-				response.sendRedirect("/mypage");
-			}
+			session.setAttribute("result", result);
+			response.sendRedirect("/mypage");
+			
 		}else if(check.equals("updateCheck")){
 			String username =	request.getParameter("username");
 			String userpassword =	request.getParameter("userpasswordUp");
@@ -56,9 +52,12 @@ public class MypageFormAction extends HttpServlet {
 			UserRequestDto userCheck = new UserRequestDto(username,userpassword,name,birth,gender,tel,pnum);
 		    boolean update = userDao.setUser(userCheck);
 		    
-		   //System.out.println("update : "+update);
+		   
+		    
+		    session.setAttribute("update", update);
+		    session.setAttribute("userCheck", userCheck);
 		   	
-			response.sendRedirect("/logout");
+			response.sendRedirect("/mypage");
 			
 		}else if(check.equals("deleteCheck")){
 			String username =	request.getParameter("username");
@@ -68,7 +67,9 @@ public class MypageFormAction extends HttpServlet {
 			UserRequestDto userCheck = new UserRequestDto(username,userpassword);
 			boolean deldate = userDao.delsetUser(userCheck);
 			
-			//System.out.println("deldate : "+deldate);
+			if(deldate) {
+				request.getSession().invalidate();
+			}
 			
 			response.sendRedirect("/logout");
 		}
