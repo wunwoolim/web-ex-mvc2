@@ -36,7 +36,7 @@ public class LoginAction implements Action{
 				if(responseUser != null){
 					HttpSession session = request.getSession();
 					session.setAttribute("responseUser", responseUser);
-					url ="/mypage";
+					url ="/";
 					
 				}else {
 					url="/login";

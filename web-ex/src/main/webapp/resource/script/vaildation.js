@@ -204,8 +204,18 @@ function deleteUser(form){
 	}
 }
 
-
+function boardCreate(form){
+	title = form.title.value;
+	content = form.content.value;
 	
+	if(title == ""){
+		alert("제목을 입력해주세요");
+	}else if(content == ""){
+		alert("내용을 입력해주세요");
+	}else{
+		form.submit();
+	}
+}
 	
 	
 	

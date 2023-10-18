@@ -315,7 +315,7 @@ public class UserDao {
 			}catch (SQLException e) {
 				e.printStackTrace();
 			}finally{
-				DBmanager.close(conn, pstmt);
+				DBmanager.close(conn, pstmt,rs);
 			}
 		}
 		return respons;
@@ -357,7 +357,6 @@ public class UserDao {
 	}
 	
 	public boolean delsetUser(UserRequestDto user) {
-		System.out.println("user : "+user.getUsername());
 		
 		User target = getUser(user);
 		

@@ -141,5 +141,55 @@
 		<servlet-name>memberList</servlet-name>
 		<url-pattern>/memberList</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>board</servlet-name>
+		<jsp-file>/views/board/board.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>board</servlet-name>
+		<url-pattern>/board</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>boardContents</servlet-name>
+		<jsp-file>/views/board/boardContents.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>boardContents</servlet-name>
+		<url-pattern>/boardContents</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>boardCreate</servlet-name>
+		<jsp-file>/views/board/boardCreate.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>boardCreate</servlet-name>
+		<url-pattern>/boardCreate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>boardUpdate</servlet-name>
+		<jsp-file>/views/board/boardUpdate.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>boardUpdate</servlet-name>
+		<url-pattern>/boardUpdate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>boardDelete</servlet-name>
+		<jsp-file>/views/board/boardDelete.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>boardDelete</servlet-name>
+		<url-pattern>/boardDelete</url-pattern>
+	</servlet-mapping>
   
 </web-app>

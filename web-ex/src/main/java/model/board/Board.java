@@ -7,23 +7,28 @@ public class Board {
     private String contents;
     private String in_date;
     private String up_date;
+    private String name;
     
     public Board() {}
     
-    public Board(String title,String contents,String in_date,String up_date) {
-    	this.title = title;
-    	this.contents = contents;
-    	this.in_date = in_date;
-    	this.up_date = up_date;
+    public Board(int id) {
+    	this.id=id;
     }
     
-    public Board(int id,int user_id,String title,String contents,String in_date,String up_date) {
+    public Board(int id, String title,String contents) {
+    	this.id=id;
+    	this.title = title;
+    	this.contents = contents;
+    }
+    
+    public Board(int id,int user_id,String title,String contents,String in_date,String up_date,String name) {
     	this.id = id;
     	this.user_id = user_id;
     	this.title = title;
     	this.contents = contents;
     	this.in_date = in_date;
     	this.up_date = up_date;
+    	this.name = name;
     }
     
     public Board(BoardRequestDto board) {
@@ -33,7 +38,16 @@ public class Board {
     	this.contents = board.getContents();
     	this.in_date = board.getIn_date();
     	this.up_date = board.getUp_date();
+    	this.name = board.getName();
     }
+    
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public int getId() {
 		return id;

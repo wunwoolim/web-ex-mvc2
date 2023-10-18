@@ -1,5 +1,9 @@
 package controller;
 
+import controller.board.BoardAction;
+import controller.board.BoardCreateAction;
+import controller.board.BoardDeleteAction;
+import controller.board.BoardUpdateAction;
 import controller.user.JoinAction;
 import controller.user.LoginAction;
 import controller.user.LogoutAction;
@@ -17,7 +21,7 @@ public class ActionPactory {
 	public Action getAction(String command) {
 		Action action = null;
 		
-		System.out.println("ActionPactory"+command);
+		System.out.println("ActionPactory : "+command);
 		
 		if(command.equals("login")) {
 			action = new LoginAction();
@@ -33,6 +37,14 @@ public class ActionPactory {
 			action = new leaveAction();
 		}else if(command.equals("memderList")) {
 			action = new MemberListAction();
+		}else if(command.equals("board")) {
+			action = new BoardAction();
+		}else if(command.equals("boardCreate")) {
+			action = new BoardCreateAction();
+		}else if(command.equals("boardUpdate")) {
+			action = new BoardUpdateAction();
+		}else if(command.equals("boardDelete")) {
+			action = new BoardDeleteAction();
 		}
 		
 		

@@ -7,6 +7,7 @@ public class BoardResponseDto {
     private String contents;
     private String in_date;
     private String up_date;
+    private String name;
     
     public BoardResponseDto(Board board) {
     	this.id = board.getId();
@@ -15,6 +16,7 @@ public class BoardResponseDto {
     	this.contents = board.getContents();
     	this.in_date = board.getIn_date();
     	this.up_date = board.getUp_date();
+    	this.name = board.getName();
     }
     
     public BoardResponseDto(BoardRequestDto board) {
@@ -24,7 +26,13 @@ public class BoardResponseDto {
     	this.contents = board.getContents();
     	this.in_date = board.getIn_date();
     	this.up_date = board.getUp_date();
+    	this.name = board.getName();
     }
+    
+    
+	public String getName() {
+		return name;
+	}
 
 	public int getId() {
 		return id;

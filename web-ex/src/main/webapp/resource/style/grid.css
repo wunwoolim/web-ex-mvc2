@@ -23,3 +23,10 @@ ul {
 li {
 	padding: 5px;
 }
+a{
+	text-decoration: none;
+}
+
+button{
+	margin: auto;
+}

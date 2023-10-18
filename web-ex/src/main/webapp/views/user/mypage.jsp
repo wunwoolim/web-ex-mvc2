@@ -2,13 +2,18 @@
 <%@page import="model.user.UserResponseDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="/resource/style/form.css">
 <title>mypage</title>
 <jsp:include page="/header"></jsp:include>
 <body>
-	<%
+
+	 <%-- <c:if test="${empty responseUser}">
+		<c:redirect url=/login"/>
+	</c:if> --%>
+	<% 
 	
 	
 	UserResponseDto responseUser = (UserResponseDto) session.getAttribute("responseUser");

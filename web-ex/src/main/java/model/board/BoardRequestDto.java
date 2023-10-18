@@ -7,24 +7,37 @@ public class BoardRequestDto {
     private String contents;
     private String in_date;
     private String up_date;
+    private String name;
     
-    public BoardRequestDto() {}
+    public BoardRequestDto(){}
     
-    public BoardRequestDto(String title,String contents,String in_date,String up_date) {
-    	this.title = title;
-    	this.contents = contents;
-    	this.in_date = in_date;
-    	this.up_date = up_date;
+    public BoardRequestDto(int id) {
+    	this.id=id;
     }
     
-    public BoardRequestDto(int id,int user_id,String title,String contents,String in_date,String up_date) {
+    public BoardRequestDto(int id,String title,String contents) {
+    	this.id=id;
+    	this.title = title;
+    	this.contents = contents;
+    }
+    
+    public BoardRequestDto(int id,int user_id,String title,String contents,String in_date,String up_date,String name) {
     	this.id = id;
     	this.user_id = user_id;
     	this.title = title;
     	this.contents = contents;
     	this.in_date = in_date;
     	this.up_date = up_date;
+    	this.name = name;
     }
+    
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public int getId() {
 		return id;
