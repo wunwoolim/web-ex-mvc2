@@ -29,12 +29,10 @@ public class editUserAction implements Action{
 		UserRequestDto userCheck = new UserRequestDto(username,userpassword,name,birth,gender,tel,pnum);
 	    boolean update = userDao.setUser(userCheck);
 	    
-	   
-	    
-	    session.setAttribute("update", update);
-	    session.setAttribute("userCheck", userCheck);
-	   	
-		response.sendRedirect("/Service?command=logout");
+	    if(update) {
+	    	response.sendRedirect("/Service?command=logout");
+	    }
+		
 		
 	}
 

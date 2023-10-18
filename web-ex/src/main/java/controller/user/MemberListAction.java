@@ -18,13 +18,14 @@ public class MemberListAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDao userDao = UserDao.getInstance();
 		
-		ArrayList<UserResponseDto> responseUser = userDao.findAll();
+		ArrayList<UserResponseDto> list = userDao.findAll();
 
 		String url ="";
-		
-		if(responseUser != null){
+		System.out.println("list : "+list);
+		if(list != null){
 			HttpSession session = request.getSession();
-			session.setAttribute("list", responseUser);
+			session.setAttribute("list", list);
+			
 			url ="/memberList";
 			
 		}else {

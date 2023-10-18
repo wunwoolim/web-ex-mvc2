@@ -17,23 +17,18 @@
 		<ul>
 			<li><a href="/">홈</a></li>
 			
-	<% 
-	UserResponseDto responseUser = (UserResponseDto) session.getAttribute("responseUser");
-	if(responseUser == (null)){
-	%>		
-			<li><a href="/join">회원가입</a></li>
-			<li><a href="/login">로그인</a></li>
-		<%
-	}else{
-		%>	
-			<li><%= responseUser.getName() %>님 환영합니다.</li>
+	<c:if test="${empty responseUser}">
+		<li><a href="/join">회원가입</a></li>
+		<li><a href="/login">로그인</a></li>
+	</c:if>
+	
+	<c:if test="${!empty responseUser}">
+		<li>${ sessionScope.responseUser.getName() }님 환영합니다.</li>
 			<li><a href="/Service?command=logout">로그아웃</a></li>
-		<%
-	}
-	%>	
+	</c:if>
 			<li><a href="/mypage">마이페이지</a></li>
 			<li><a href="/Service?command=board">게시판</a></li>
-			<li><a href="/Service?command=memderList">회원목록 조회</a></li>
+			<li><a href="/Service?command=memberList">회원목록 조회</a></li>
 		</ul>
 	</nav>
 

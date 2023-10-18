@@ -26,7 +26,7 @@ public class BoardUpdateAction implements Action{
 	    boolean update = boardDao.setUser(BoardCheck);
 	    
 	    if(update) {
-	    	response.sendRedirect("/board");
+	    	response.sendRedirect("/Service?command=board");
 	    }else {
 	    	response.sendRedirect("/boardUpdate?id="+id);
 	    }

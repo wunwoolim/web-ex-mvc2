@@ -35,7 +35,7 @@ public class ActionPactory {
 			action = new editUserAction();
 		}else if(command.equals("deleteCheck")) {
 			action = new leaveAction();
-		}else if(command.equals("memderList")) {
+		}else if(command.equals("memberList")) {
 			action = new MemberListAction();
 		}else if(command.equals("board")) {
 			action = new BoardAction();

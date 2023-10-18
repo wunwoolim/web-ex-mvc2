@@ -23,7 +23,7 @@ public class BoardDeleteAction implements Action{
 		boolean delete = boardDao.deleteBoard(boardCheck);
 		
 		if(delete) {
-			response.sendRedirect("/board");
+			response.sendRedirect("/Service?command=board");
 		}else {
 			response.sendRedirect("/boardDelete?id="+id);
 		}
