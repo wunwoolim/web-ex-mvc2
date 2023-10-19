@@ -13,11 +13,19 @@ public class DBmanager {
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			/*
+			 * Class.forName("com.mysql.cj.jdbc.Driver");
+			 * 
+			 * String url = "jdbc:mysql://localhost:3306/web_ex"; String user = "root";
+			 * String password = "root";
+			 * 
+			 * conn = DriverManager.getConnection(url,user,password);
+			 */
 			
-			String url = "jdbc:mysql://localhost:3306/web_ex";
-			String user = "root";
-			String password = "root";
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String user = "C##web"; // -> "C##web_ex"
+			String password = "1234"; // -> "1234"
 			
 			conn = DriverManager.getConnection(url,user,password);
 			

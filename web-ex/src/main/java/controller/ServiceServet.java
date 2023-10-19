@@ -26,8 +26,6 @@ public class ServiceServet extends HttpServlet {
 		//comend pattern
 		String command = request.getParameter("command");
 		
-		System.out.println("doGet : "+command);
-		
 		if(command == null) {
 			response.sendRedirect("/");
 		}

@@ -35,7 +35,7 @@ public class UserDao {
 		//conn = DBmanager.getConnection(); 앞에서 선언 후 finally가 안되있으므로 선언할 필요가 없다
 		//초기화만 시켜준다
 		
-			String sql = "INSERT INTO `USER` VALUES(?,?,?,?,date(?),?,?,?)";
+			String sql = "INSERT INTO web_user VALUES(?,?,?,?,TO_DATE(?,'YYMMDD'),?,?,?)";
 			
 			int genterStr;
 			if(newUser.getGender()  == "male") {
@@ -68,7 +68,7 @@ public class UserDao {
 	}
 	
 	public boolean isDuplicatedUser(UserRequestDto user) {
-		String sql = "select * from `USER` where userbname = ?";
+		String sql = "select * from web_user where username = ?";
 		
 		conn = DBmanager.getConnection();
 		
@@ -106,7 +106,7 @@ public class UserDao {
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
-			String sql = "select * from `USER` where password = ?";
+			String sql = "select * from web_user where password = ?";
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, user.getPassword());
@@ -136,7 +136,7 @@ public class UserDao {
 			conn = DBmanager.getConnection();
 			
 			if(conn != null) {
-				String sql = "select * from `USER` where id = ?";
+				String sql = "select * from web_user where id = ?";
 				try {
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, id);
@@ -162,7 +162,7 @@ public class UserDao {
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
-			String sql = "select * from `USER` where id = ?";
+			String sql = "select * from web_user where id = ?";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -187,13 +187,11 @@ public class UserDao {
 					}
 					
 					result =new UserResponseDto(new User(id,username,password,name,birth,genterStr,tel,pnum));
-					System.out.println("result : "+result);
+					
 				}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally {
-				DBmanager.close(conn, pstmt, rs);
 			}
 		}
 		
@@ -205,7 +203,7 @@ public class UserDao {
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
-			String sql = "select * from `USER` where username = ? AND `password` = ?";
+			String sql = "select * from web_user where username = ? AND password = ?";
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, username);
@@ -229,13 +227,11 @@ public class UserDao {
 					}
 					
 					result =new UserResponseDto(new User(id,username,password,name,birth,genterStr,tel,pnum));
-					System.out.println("result : "+result);
+					
 				}
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
-				DBmanager.close(conn, pstmt, rs);
 			}
 		}
 		
@@ -248,7 +244,7 @@ public class UserDao {
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
-			String sql = "select * from `USER` where username = ?";
+			String sql = "select * from web_user where username = ?";
 			try {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, userDto.getUsername());
@@ -277,8 +273,6 @@ public class UserDao {
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
-				DBmanager.close(conn, pstmt, rs);
 			}
 		}
 		
@@ -289,7 +283,7 @@ public class UserDao {
 		ArrayList<UserResponseDto> respons = new ArrayList<>();
 		conn = DBmanager.getConnection();
 		if(conn != null) {
-			String sql = "select * from `USER`";
+			String sql = "select * from web_user";
 			try {
 				pstmt = conn.prepareStatement(sql);
 				
@@ -314,8 +308,6 @@ public class UserDao {
 				}
 			}catch (SQLException e) {
 				e.printStackTrace();
-			}finally{
-				DBmanager.close(conn, pstmt,rs);
 			}
 		}
 		return respons;
@@ -331,7 +323,7 @@ public class UserDao {
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
-			String sql = "UPDATE `USER` SET password = ?,name = ?, tel = ?, pnum = ? WHERE username = ?";
+			String sql = "UPDATE web_user SET password = ?,name = ?, tel = ?, pnum = ? WHERE username = ?";
 					
 			try {
 				
@@ -370,7 +362,7 @@ public class UserDao {
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
-			String sql = "DELETE from `USER` where username = ?";
+			String sql = "DELETE from web_user where username = ?";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);

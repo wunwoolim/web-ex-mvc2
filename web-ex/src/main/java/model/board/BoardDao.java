@@ -30,7 +30,7 @@ public class BoardDao {
 		
 		conn = DBmanager.getConnection();
 		
-		String sql = "INSERT INTO board(user_id,title,contents,in_date) VALUES(?,?,?,date(sysdate()))";
+		String sql = "INSERT INTO web_board(user_id,title,contents,in_date) VALUES(?,?,?,sysdate)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -57,9 +57,9 @@ public class BoardDao {
 		ArrayList<BoardResponseDto> respons = new ArrayList<>();
 		conn = DBmanager.getConnection();
 		if(conn != null) {
-			String sql = "SELECT b.id, b.user_id, b.title, b.contents, b.in_date, b.up_date, u.name "
-                    + "FROM board b "
-                    + "JOIN user u ON b.user_id = u.id";
+			String sql = "SELECT b.id, b.user_id, b.title, b.contents, TO_CHAR(in_date,'YYYYMMDD HH24:MI') in_date, TO_CHAR(up_date,'YYYYMMDD HH24:MI') up_date, u.name "
+                    + "FROM web_board b "
+                    + "JOIN web_user u ON b.user_id = u.id";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -79,8 +79,6 @@ public class BoardDao {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally {
-				DBmanager.close(conn, pstmt, rs);
 			}
 		}
 		
@@ -91,13 +89,8 @@ public class BoardDao {
 		
 		conn = DBmanager.getConnection();
 		
-		System.out.println("BoardUpdateAction : "+ board.getId());
-		System.out.println("BoardUpdateAction : "+ board.getTitle());
-		System.out.println("BoardUpdateAction : "+ board.getContents());
-		
-		
 		if(conn != null) {
-			String sql = "UPDATE BOARD SET title = ?,contents = ?,up_date = NOW() where id = ?";
+			String sql = "UPDATE web_board SET title = ?,contents = ?,up_date = sysdate where id = ?";
 			try {
 				pstmt = conn.prepareStatement(sql);
 		
@@ -121,7 +114,7 @@ public class BoardDao {
 		conn = DBmanager.getConnection();
 		
 		if(conn != null) {
-			String sql = "DELETE from board where id = ?";
+			String sql = "DELETE from web_board where id = ?";
 			
 			try {
 				pstmt = conn.prepareStatement(sql);

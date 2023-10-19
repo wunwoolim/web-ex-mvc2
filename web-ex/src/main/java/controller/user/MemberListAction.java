@@ -21,7 +21,7 @@ public class MemberListAction implements Action{
 		ArrayList<UserResponseDto> list = userDao.findAll();
 
 		String url ="";
-		System.out.println("list : "+list);
+		
 		if(list != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("list", list);

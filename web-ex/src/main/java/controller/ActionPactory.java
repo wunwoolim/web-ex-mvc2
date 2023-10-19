@@ -21,8 +21,6 @@ public class ActionPactory {
 	public Action getAction(String command) {
 		Action action = null;
 		
-		System.out.println("ActionPactory : "+command);
-		
 		if(command.equals("login")) {
 			action = new LoginAction();
 		}else if(command.equals("logout")) {
